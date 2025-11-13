@@ -127,10 +127,13 @@ The original video without audio and the synthesized German audio is fed into th
 Results from a sample run are available in the `output/` folder along with the input in the `data/` folder. 
 
 ### Original (with audio)
-[🎥 Watch Original Video](data/Tanzania-2.mp4)
+[Watch Original Video](data/Tanzania-2.mp4)
 
 ### Translated (with audio)
-[🎥 Watch Translated Video](output/translated_video.mp4)
+[Watch Translated Video](output/translated_video.mp4)
+
+### Lip-synced (short sample)
+[Watch Lip-synced Video](output/lip_sync_video.mp4)
 
 ## **Assumptions & Limitations of the Pipeline**
 
