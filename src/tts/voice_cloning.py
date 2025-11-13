@@ -6,6 +6,7 @@ import soundfile as sf
 import tempfile
 import librosa
 import srt
+from tqdm import tqdm
 from src.utils import resample_if_needed
 from src.tts.tts_engine import ChatterboxTTSEngine
 
@@ -88,7 +89,7 @@ class VoiceCloner:
         full_audio = np.array([], dtype=np.float32)
         current_time = 0.0
 
-        for sub in subs:
+        for sub in tqdm(subs, desc="Generating voice clones", unit="segment"):
             text = sub.content.strip() 
             if not text:
                 continue

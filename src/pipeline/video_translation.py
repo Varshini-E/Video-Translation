@@ -1,10 +1,9 @@
 import os
-import srt
 import shutil
 import soundfile as sf
 from src.tts.voice_cloning import CloneConfiguration, VoiceCloner
 from src.translate_text.translator import SimpleTranslator
-from src.utils import replace_audio_in_video
+from src.utils import replace_audio_in_video, loudnorm_wav
 
 class VideoTranslator:
     def __init__(self, input_video: str, subtitles: str, output_path: str, output_video_name: str, tts_config: CloneConfiguration, speaker_ref: str, video_duration: float):
@@ -31,9 +30,12 @@ class VideoTranslator:
         translated_audio = self.voice_cloner.clone_speech(translated_subtitles, self.speaker_ref, self.video_duration)
         print("Text to speech in cloned voice generated\n")
 
+        # Normalize audio loudness
+        normalized_audio = loudnorm_wav(translated_audio)
+
         # Save cloned audio to output directory
         dest_audio_path = os.path.join(self.output_path, "cloned_audio.wav")
-        shutil.copy2(translated_audio, dest_audio_path)
+        shutil.copy2(normalized_audio, dest_audio_path)
         print(f"Cloned audio saved to {dest_audio_path}")
 
         replace_audio_in_video(self.input_video, dest_audio_path, self.output_video)

@@ -5,6 +5,34 @@ import soundfile as sf
 import srt
 import os
 import tempfile
+import warnings
+import logging
+
+def suppress_warnings_and_logs():
+    # Silence Python warnings
+    os.environ["PYTHONWARNINGS"] = "ignore"
+    warnings.filterwarnings("ignore")
+    warnings.filterwarnings(
+        "ignore",
+        category=UserWarning,
+        message="pkg_resources is deprecated as an API.*"
+    )
+
+    # HF transformers verbosity
+    os.environ["TRANSFORMERS_VERBOSITY"] = "error"
+    os.environ["HF_HUB_DISABLE_PROGRESS_BARS"] = "1"
+
+    try:
+        from transformers import logging as hf_logging
+        hf_logging.set_verbosity_error()
+    except Exception:
+        pass
+
+    # Silence logging globally
+    logging.getLogger().setLevel(logging.ERROR)
+    logging.getLogger("root").setLevel(logging.ERROR)
+    logging.getLogger("chatterbox").setLevel(logging.ERROR)
+    logging.getLogger("chatterbox.models.t3.inference.alignment_stream_analyzer").setLevel(logging.ERROR)
 
 def to_mono_float32(y):
     if y.ndim > 1:
@@ -94,3 +122,15 @@ def extract_audio_from_subtitles(video_path, subtitles_path, sr=24000):
     extract_audio_snippet(video_path, output_wav, longest_sub_start, duration, sr=sr)
     
     return output_wav
+
+def loudnorm_wav(in_wav: str, out_sr: int = 24000, mono: bool = True):
+    (
+        ffmpeg
+            .input(in_wav)
+            .filter('loudnorm')
+            .output(in_wav.replace(".wav", "_norm.wav"))
+            .overwrite_output()
+            .run(quiet=True)
+    )
+    os.replace(in_wav.replace(".wav", "_norm.wav"), in_wav)
+    return in_wav

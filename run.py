@@ -1,3 +1,5 @@
+from src.utils import suppress_warnings_and_logs
+suppress_warnings_and_logs()
 
 import argparse
 from src.pipeline.video_translation import VideoTranslator
