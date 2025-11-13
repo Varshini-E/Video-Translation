@@ -5,9 +5,10 @@ A tool that translates video from English to German while keeping the speaker’
 Setting up the environment and running inference is simple and the solution works on both CPU and GPU devices. 
 For Text-to-Speech Voice Cloning, the [Chatterbox](https://huggingface.co/ResembleAI/chatterbox) model is utilized which requires a small fix to be carried out on CPU-only devices [a known issue yet to be fixed on Chatterbox's end]. 
 
-### **1. Create a Conda Environment**
+### **1. Clone the git repository and create a Conda Environment**
+First, clone this repository by running `git clone https://github.com/Varshini-E/Video-Translation`.
 
-First, create a new conda environment named video-translate by running the following command:
+Then, create a new conda environment named video-translate by running the following command:
 
 ```bash
 conda create -n video-translate python=3.10
@@ -22,7 +23,9 @@ pip install -r requirements.txt
 By default, Chatterbox expects a CUDA GPU.  
 If you're running on CPU, you need to modify two model loading lines in the installed environment package:
 
-File: `<your_conda_env>/lib/python3.10/site-packages/chatterbox/mtl_tts.py`  
+File: `<your_conda_env>/lib/python3.10/site-packages/chatterbox/mtl_tts.py`
+You can find your conda env path by running `echo $CONDA_PREFIX`.
+To open the file in your IDE, run `<editor_command> <path/to/file>`
 
 Change these lines:
 ```python
@@ -127,13 +130,10 @@ The original video without audio and the synthesized German audio is fed into th
 Results from a sample run are available in the `output/` folder along with the input in the `data/` folder. 
 
 ### Original (with audio)
-[Watch Original Video](https://drive.google.com/file/d/12ciSFpmZVupxLq0bXaxmGfZBjAH858xR/view?usp=drive_link)
+[🎥 Watch Original Video](data/Tanzania-2.mp4)
 
 ### Translated (with audio)
-[Watch Translated Video](https://drive.google.com/file/d/1fXSeflVNuCq3UHQ7y02voIMHQg5msjTy/view?usp=drive_link)
-
-### Lip-synced (short sample)
-[Watch Lip-synced Video](https://drive.google.com/file/d/1w5lk71Oh-tCTAbwiHzoediA9GuwP8n-q/view?usp=drive_link)
+[🎥 Watch Translated Video](output/translated_video.mp4)
 
 ## **Assumptions & Limitations of the Pipeline**
 
