@@ -63,6 +63,7 @@ where `map_location=device` is additionally passed to the `torch.load` function.
     python run.py --input_video "data/video.mp4" \
                   --subtitles "data/subtitles.srt" 
    ```
+3. (Optional Lip-sync)
 
 List of CLI arguments for `run.py`
 ### Command-Line Arguments
