@@ -20,12 +20,12 @@ class VideoTranslator:
 
     def translate_video(self) -> str:
         translated_subtitles = self.translator.translate_subs(self.subtitles)
-        print("Subtitles translated to German\n")
+        print("Subtitles translated to German")
 
         # Save translated subtitles to output directory
         dest_subs_path = os.path.join(self.output_path, "translated_subtitles.srt")
         shutil.copy2(translated_subtitles, dest_subs_path)
-        print(f"Translated subtitles saved to {dest_subs_path}")
+        print(f"Translated subtitles saved to {dest_subs_path}\n")
 
         translated_audio = self.voice_cloner.clone_speech(translated_subtitles, self.speaker_ref, self.video_duration)
         print("Text to speech in cloned voice generated\n")
@@ -36,7 +36,7 @@ class VideoTranslator:
         # Save cloned audio to output directory
         dest_audio_path = os.path.join(self.output_path, "cloned_audio.wav")
         shutil.copy2(normalized_audio, dest_audio_path)
-        print(f"Cloned audio saved to {dest_audio_path}")
+        print(f"Cloned audio saved to {dest_audio_path}\n")
 
         replace_audio_in_video(self.input_video, dest_audio_path, self.output_video)
         print(f"Video translated and saved to {self.output_video}")
