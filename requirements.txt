@@ -1,0 +1,10 @@
+librosa>=0.11.0
+soundfile>=0.13.0
+numpy>=1.25.0
+ffmpeg-python>=0.2.0
+srt>=3.5.0
+torch>=2.0.0
+torchaudio>=2.0.0
+transformers>=4.40.0
+chatterbox-tts>=0.1.4
+sentencepiece
