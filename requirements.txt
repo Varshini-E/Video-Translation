@@ -8,5 +8,4 @@ torchaudio>=2.0.0
 transformers>=4.40.0
 chatterbox-tts>=0.1.4
 sentencepiece
-shutil
 tqdm

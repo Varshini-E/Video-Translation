@@ -89,7 +89,7 @@ class VoiceCloner:
         full_audio = np.array([], dtype=np.float32)
         current_time = 0.0
 
-        for sub in tqdm(subs, desc="Generating voice clones", unit="segment"):
+        for sub in tqdm(subs, desc="Generating voice cloned segments", unit="segment"):
             text = sub.content.strip() 
             if not text:
                 continue
